@@ -7,8 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
-
 // ================= UTILITY FUNCTIONS =================
 
 // Fibonacci
@@ -114,15 +112,12 @@ app.post("/bfhl", async (req, res) => {
         {
           model: "openai/gpt-3.5-turbo",
           messages: [
-            {
-              role: "user",
-              content: value
-            }
+            { role: "user", content: value }
           ]
         },
         {
           headers: {
-            "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+            Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
             "Content-Type": "application/json"
           }
         }
@@ -154,8 +149,5 @@ app.post("/bfhl", async (req, res) => {
   }
 });
 
-// ================= START SERVER =================
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+module.exports = app;
